@@ -1,16 +1,32 @@
 let app = Vue.createApp({
   data() {
     return {
+      categories: [
+        "Bostad",
+        "Hushåll",
+        "Mat & dryck",
+        "Transport",
+        "Nöje & shopping",
+        "Övrigt",
+      ],
       newExpense: {
         price: 0,
         date: "",
         desc: "",
         category: "",
       },
-      expenses: [],
+      totalExpenses: [],
     };
   },
-  computed: {},
+  computed: {
+    totalPrice: function () {
+      let sum = 0;
+      this.totalExpenses.forEach((exp) => {
+        sum += exp.price;
+      });
+      return sum;
+    },
+  },
   methods: {
     addExpense() {
       if (
@@ -18,7 +34,7 @@ let app = Vue.createApp({
         this.newExpense.price > 0 &&
         this.newExpense.date !== ""
       ) {
-        this.expenses.push({
+        this.totalExpenses.push({
           price: this.newExpense.price,
           date: this.newExpense.date,
           desc: this.newExpense.desc,
