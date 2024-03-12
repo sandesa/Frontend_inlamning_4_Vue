@@ -23,6 +23,8 @@
             <label for="priceInput">Price:</label>
             <input
               type="number"
+              min="0"
+              step="100"
               id="priceInput"
               v-model.number="newExpense.price"
             />

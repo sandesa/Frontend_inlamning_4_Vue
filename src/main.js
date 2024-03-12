@@ -18,49 +18,49 @@ let app = Vue.createApp({
       },
       expenses: [
         {
-          price: 100,
+          price: 100.32,
           date: "2024-04-10",
           desc: "",
           category: "Bostad",
         },
         {
-          price: 1001,
+          price: 1001.01,
           date: "2024-03-11",
           desc: "",
           category: "Bostad",
         },
         {
-          price: 10011,
+          price: 10011.1,
           date: "2024-02-11",
           desc: "",
           category: "Hushåll",
         },
         {
-          price: 1100,
+          price: 1100.2,
           date: "2024-03-11",
           desc: "",
           category: "Övrigt",
         },
         {
-          price: 100,
+          price: 100.02,
           date: "2024-03-10",
           desc: "",
           category: "Transport",
         },
         {
-          price: 10,
+          price: 10.04,
           date: "2024-03-11",
           desc: "",
           category: "Nöje & shopping",
         },
         {
-          price: 100,
+          price: 100.35,
           date: "2024-01-11",
           desc: "Random desc",
           category: "Bostad",
         },
         {
-          price: 220,
+          price: 220.98,
           date: "2024-01-11",
           desc: "Random desc",
           category: "Transport",
@@ -77,7 +77,7 @@ let app = Vue.createApp({
         this.newExpense.date !== ""
       ) {
         this.expenses.push({
-          price: this.newExpense.price,
+          price: this.newExpense.price.toFixed(2),
           date: this.newExpense.date,
           desc: this.newExpense.desc,
           category: this.newExpense.category,
@@ -149,7 +149,7 @@ app.component("result-table", {
             sum += exp.price;
           }
         });
-        return sum;
+        return sum.toFixed(2);
       }
     },
   },
