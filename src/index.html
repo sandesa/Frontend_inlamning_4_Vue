@@ -40,7 +40,7 @@
               </option>
             </select>
 
-            <label for="descriptionInput"></label>
+            <label for="descriptionInput">Description:</label>
             <textarea
               id="descriptionInput"
               cols="30"
@@ -51,24 +51,11 @@
             <input type="submit" value="Submit" />
           </form>
 
-          <table v-if="totalExpenses.length > 0">
-            <tr>
-              <th>Kostnad</th>
-              <th>Datum</th>
-              <th>Kategori</th>
-              <th>Beskrivning</th>
-            </tr>
-            <tr v-for="(exp, index) in totalExpenses" :key="index">
-              <td>{{exp.price}}</td>
-              <td>{{exp.date}}</td>
-              <td>{{exp.category}}</td>
-              <td>{{exp.desc}}</td>
-            </tr>
-            <tr>
-              <td>Totala utgifter</td>
-              <td>{{totalPrice}}</td>
-            </tr>
-          </table>
+          <result-table
+            :categories="categories"
+            :total-exp="totalExpenses"
+            :selected-category="selectedCategory"
+          ></result-table>
         </div>
       </div>
     </div>
