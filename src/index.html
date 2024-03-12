@@ -31,6 +31,7 @@
             <input type="date" id="dateInput" v-model="newExpense.date" />
 
             <select id="categoryInput" v-model="newExpense.category">
+              <option value="">--Category--</option>
               <option
                 v-for="(category, index) in categories"
                 :key="index"
@@ -46,6 +47,7 @@
               cols="30"
               rows="5"
               v-model="newExpense.desc"
+              placeholder="Description..."
             ></textarea>
 
             <input type="submit" value="Submit" />
