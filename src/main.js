@@ -9,13 +9,63 @@ let app = Vue.createApp({
         "Nöje & shopping",
         "Övrigt",
       ],
+      months: {},
       newExpense: {
         price: 0,
         date: "",
         desc: "",
         category: "",
       },
-      expenses: [],
+      expenses: [
+        {
+          price: 100,
+          date: "2024-04-10",
+          desc: "",
+          category: "Bostad",
+        },
+        {
+          price: 1001,
+          date: "2024-03-11",
+          desc: "",
+          category: "Bostad",
+        },
+        {
+          price: 10011,
+          date: "2024-02-11",
+          desc: "",
+          category: "Hushåll",
+        },
+        {
+          price: 1100,
+          date: "2024-03-11",
+          desc: "",
+          category: "Övrigt",
+        },
+        {
+          price: 100,
+          date: "2024-03-10",
+          desc: "",
+          category: "Transport",
+        },
+        {
+          price: 10,
+          date: "2024-03-11",
+          desc: "",
+          category: "Nöje & shopping",
+        },
+        {
+          price: 100,
+          date: "2024-01-11",
+          desc: "Random desc",
+          category: "Bostad",
+        },
+        {
+          price: 220,
+          date: "2024-01-11",
+          desc: "Random desc",
+          category: "Transport",
+        },
+      ],
     };
   },
   computed: {},
@@ -40,8 +90,8 @@ let app = Vue.createApp({
         alert("Ej korrekt input");
       }
     },
-    removeItem(id) {
-      this.expenses.splice(id, 1);
+    removeItem(index) {
+      this.expenses.splice(index, 1);
     },
   },
 });
