@@ -155,7 +155,7 @@ app.component("result-table", {
         <option value="">All</option>
         <option v-for="(month, index) in months" :key="index+1" :value="index+1">{{month}}</option>
       </select>
-
+      
       <table v-if="selectedCategory !== '' || selectedMonth !== ''">
         <thead>
           <tr>
