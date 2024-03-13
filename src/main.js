@@ -143,21 +143,18 @@ app.component("result-table", {
   ],
   template: `
     <div>
-      
       <label for="selectCategory">Select a category:</label>
       <select id="selectCategory" v-model="selectedCategory">
         <option value="">None</option>
         <option value="all">All</option>
         <option v-for="(category, index) in categories" :key="index" :value="category">{{category}}</option>
       </select>
-       
 
       <label for="selectMonth">Select month:</label>
       <select id="selectMonth" v-model="selectedMonth">
         <option value="">All</option>
         <option v-for="(month, index) in months" :key="index+1" :value="index+1">{{month}}</option>
       </select>
-      
       
       <table v-if="selectedCategory !== '' || selectedMonth !== ''">
         <thead>

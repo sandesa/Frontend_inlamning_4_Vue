@@ -101,3 +101,7 @@ tbody td {
 #selectMonth {
   margin: 15px;
 }
+
+#categoryInput {
+  margin-left: auto;
+}
