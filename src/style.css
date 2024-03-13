@@ -72,6 +72,7 @@ button[type="submit"]:hover {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
 }
 
 table {
@@ -93,4 +94,10 @@ tbody td {
 .total {
   padding: 10px;
   color: #45a049;
+  font-size: 18px;
+}
+
+#selectCategory,
+#selectMonth {
+  margin: 15px;
 }
