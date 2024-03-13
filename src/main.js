@@ -170,14 +170,14 @@ app.component("result-table", {
           <template v-for="(exp, index) in filteredExpenses" :key="index"> 
             <tr>
             <td>{{exp.date}}</td>
-            <td>{{exp.price}} kr</td>
+            <td>{{formatPrice(exp.price)}}</td>
               <td>{{exp.category}}</td>
               <td>{{exp.desc}}</td>
               <td><button @click="removeExpense(exp)" class="far fa-trash-alt custom-button"></button></td>
             </tr>
           </template>
           <tr class="total">
-          <td>Total: {{ sum }} kr</td>
+          <td>Total: {{ sum }}</td>
           </tr>
           </tbody>
       </table>
@@ -218,7 +218,10 @@ app.component("result-table", {
           sum += exp.price;
         });
 
-        return sum.toFixed(2);
+        return new Intl.NumberFormat("sv-SE", {
+          style: "currency",
+          currency: "SEK",
+        }).format(sum);
       } else if (this.selectedCategory !== "") {
         let filteredExpenses = this.allExpenses.filter(
           (expense) =>
@@ -230,7 +233,10 @@ app.component("result-table", {
           sum += exp.price;
         });
 
-        return sum.toFixed(2);
+        return new Intl.NumberFormat("sv-SE", {
+          style: "currency",
+          currency: "SEK",
+        }).format(sum);
       } else if (this.selectedMonth !== "") {
         let filteredExpenses = this.allExpenses.filter(
           (expense) =>
@@ -241,10 +247,15 @@ app.component("result-table", {
         filteredExpenses.forEach((exp) => {
           sum += exp.price;
         });
-
-        return sum.toFixed(2);
+        return new Intl.NumberFormat("sv-SE", {
+          style: "currency",
+          currency: "SEK",
+        }).format(sum);
       }
-      return sum;
+      return new Intl.NumberFormat("sv-SE", {
+        style: "currency",
+        currency: "SEK",
+      }).format(sum);
     },
   },
   data() {
@@ -273,6 +284,14 @@ app.component("result-table", {
       if (index !== -1) {
         this.remove(index);
       }
+    },
+    formatPrice(exp) {
+      let formattedPrice = exp;
+
+      return new Intl.NumberFormat("sv-SE", {
+        style: "currency",
+        currency: "SEK",
+      }).format(formattedPrice);
     },
   },
 });
