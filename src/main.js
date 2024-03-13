@@ -159,28 +159,27 @@ app.component("result-table", {
       <table v-if="selectedCategory !== '' || selectedMonth !== ''">
         <thead>
           <tr>
-            <th><a href="#" @click="sortPrice">Kostnad</a></th>
-            <th><a href="#" @click="sortDate">Datum</a></th>
+          <th><a href="#" @click="sortDate">Datum</a></th>
+          <th><a href="#" @click="sortPrice">Kostnad</a></th>
             <th><a href="#" @click="sortCat">Category</a></th>
             <th>Beskrivning</th>
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="expense">
           <template v-for="(exp, index) in filteredExpenses" :key="index"> 
             <tr>
-              <td>{{exp.price}}</td>
-              <td>{{exp.date}}</td>
+            <td>{{exp.date}}</td>
+            <td>{{exp.price}} kr</td>
               <td>{{exp.category}}</td>
               <td>{{exp.desc}}</td>
               <td><button @click="removeExpense(exp)" class="far fa-trash-alt custom-button"></button></td>
             </tr>
           </template>
-          <tr>
-            <td>Total:</td>
-            <td>{{ sum }}</td>
+          <tr class="total">
+          <td>Total: {{ sum }} kr</td>
           </tr>
-        </tbody>
+          </tbody>
       </table>
     </div>
   `,

@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   background-color: #f9f9f9;
   padding: 20px;
@@ -36,11 +36,6 @@ input {
   outline: none;
 }
 
-input[type="text"]::placeholder,
-input[type="number"]::placeholder {
-  color: #999;
-}
-
 button[type="submit"] {
   padding: 10px 20px;
   background-color: #4caf50;
@@ -64,10 +59,10 @@ button[type="submit"]:hover {
 }
 
 .custom-button:hover {
-  background-color: rgb(190, 0, 0);
+  background-color: rgb(223, 0, 0);
 }
 
-.expense-table {
+.result-table {
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
@@ -87,16 +82,10 @@ thead th {
 
 tbody td {
   padding: 10px;
-  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 
-.delete-btn {
-  color: red;
-  cursor: pointer;
-}
-
-.total-amount {
+.total {
   padding: 10px;
-  text-align: right;
-  background-color: #f2f2f2;
+  color: #45a049;
 }
