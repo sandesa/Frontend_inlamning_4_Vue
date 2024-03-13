@@ -12,7 +12,6 @@ let app = Vue.createApp({
         "Nöje & shopping",
         "Övrigt",
       ],
-      months: {},
       newExpense: {
         price: 0,
         date: "",
@@ -143,67 +142,140 @@ app.component("result-table", {
     "sortDate",
   ],
   template: `
-      <div>
-        <label for="selectCategory">Select a category:</label>
-        <select id="selectCategory" v-model="selectedCategory">
-          <option value="">None</option>
-          <option value="all">All</option>
-          <option
-            v-for="(category, index) in categories"
-            :key="index"
-            :value="category"
-          >
-            {{category}}
-          </option>
-        </select>
-  
-        <table v-if="selectedCategory !== ''">
+    <div>
+      <label for="selectCategory">Select a category:</label>
+      <select id="selectCategory" v-model="selectedCategory">
+        <option value="">None</option>
+        <option value="all">All</option>
+        <option v-for="(category, index) in categories" :key="index" :value="category">{{category}}</option>
+      </select>
+
+      <label for="selectMonth">Select month:</label>
+      <select id="selectMonth" v-model="selectedMonth">
+        <option value="">All</option>
+        <option v-for="(month, index) in months" :key="index+1" :value="index+1">{{month}}</option>
+      </select>
+
+      <table v-if="selectedCategory !== '' || selectedMonth !== ''">
+        <thead>
           <tr>
             <th><a href="#" @click="sortPrice">Kostnad</a></th>
             <th><a href="#" @click="sortDate">Datum</a></th>
             <th><a href="#" @click="sortCat">Category</a></th>
             <th>Beskrivning</th>
+            <th></th>
           </tr>
-          <template v-for="(exp, index) in allExpenses"
-          :key="index"> 
-          <tr v-if="exp.category === selectedCategory || selectedCategory === 'all'">
-            <td>{{exp.price}}</td>
-            <td>{{exp.date}}</td>
-            <td>{{exp.category}}</td>
-            <td>{{exp.desc}}</td>
-            <button @click="remove(index)" class="far fa-trash-alt"></button>
-          </tr>
+        </thead>
+        <tbody>
+          <template v-for="(exp, index) in filteredExpenses" :key="index"> 
+            <tr>
+              <td>{{exp.price}}</td>
+              <td>{{exp.date}}</td>
+              <td>{{exp.category}}</td>
+              <td>{{exp.desc}}</td>
+              <td><button @click="removeExpense(exp)" class="far fa-trash-alt"></button></td>
+            </tr>
           </template>
           <tr>
-            <td>Summa:</td>
-            <td>{{sum}}</td>
+            <td>Total:</td>
+            <td>{{ sum }}</td>
           </tr>
-        </table>
-      </div>
-    `,
+        </tbody>
+      </table>
+    </div>
+  `,
   computed: {
+    filteredExpenses() {
+      let filtered = this.allExpenses;
+
+      if (this.selectedCategory !== "" && this.selectedCategory !== "all") {
+        filtered = filtered.filter(
+          (expense) => expense.category === this.selectedCategory
+        );
+      }
+
+      if (this.selectedMonth !== "") {
+        filtered = filtered.filter(
+          (expense) =>
+            new Date(expense.date).getMonth() + 1 ===
+            parseInt(this.selectedMonth)
+        );
+      }
+
+      return filtered;
+    },
     sum() {
       let sum = 0;
-      if (this.selectedCategory !== "") {
-        this.allExpenses.forEach((exp) => {
-          if (
-            exp.category === this.selectedCategory ||
-            this.selectedCategory === "all"
-          ) {
-            sum += exp.price;
-          }
-          sum = Math.round(sum * 100) / 100;
+      if (this.selectedCategory !== "" && this.selectedMonth !== "") {
+        let filteredExpenses = this.allExpenses.filter(
+          (expense) =>
+            (expense.category === this.selectedCategory ||
+              this.selectedCategory === "all") &&
+            new Date(expense.date).getMonth() + 1 ===
+              parseInt(this.selectedMonth)
+        );
+
+        filteredExpenses.forEach((exp) => {
+          sum += exp.price;
         });
-        return sum;
+
+        return sum.toFixed(2);
+      } else if (this.selectedCategory !== "") {
+        let filteredExpenses = this.allExpenses.filter(
+          (expense) =>
+            expense.category === this.selectedCategory ||
+            this.selectedCategory === "all"
+        );
+
+        filteredExpenses.forEach((exp) => {
+          sum += exp.price;
+        });
+
+        return sum.toFixed(2);
+      } else if (this.selectedMonth !== "") {
+        let filteredExpenses = this.allExpenses.filter(
+          (expense) =>
+            new Date(expense.date).getMonth() + 1 ===
+            parseInt(this.selectedMonth)
+        );
+
+        filteredExpenses.forEach((exp) => {
+          sum += exp.price;
+        });
+
+        return sum.toFixed(2);
       }
+      return sum;
     },
   },
   data() {
     return {
       selectedCategory: "",
+      selectedMonth: "",
+      months: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ],
     };
   },
-  methods: {},
+  methods: {
+    removeExpense(expense) {
+      const index = this.allExpenses.indexOf(expense);
+      if (index !== -1) {
+        this.remove(index);
+      }
+    },
+  },
 });
 
 app.mount("#app");
