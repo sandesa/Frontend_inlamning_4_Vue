@@ -173,7 +173,7 @@ app.component("result-table", {
               <td>{{exp.date}}</td>
               <td>{{exp.category}}</td>
               <td>{{exp.desc}}</td>
-              <td><button @click="removeExpense(exp)" class="far fa-trash-alt"></button></td>
+              <td><button @click="removeExpense(exp)" class="far fa-trash-alt custom-button"></button></td>
             </tr>
           </template>
           <tr>

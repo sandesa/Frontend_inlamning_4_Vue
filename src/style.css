@@ -4,7 +4,6 @@
   padding: 0;
 }
 
-/* style.css */
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
@@ -30,8 +29,7 @@ form {
   margin-bottom: 20px;
 }
 
-input[type="text"],
-input[type="number"] {
+input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -43,7 +41,7 @@ input[type="number"]::placeholder {
   color: #999;
 }
 
-button {
+button[type="submit"] {
   padding: 10px 20px;
   background-color: #4caf50;
   color: white;
@@ -52,8 +50,21 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button[type="submit"]:hover {
   background-color: #45a049;
+}
+
+.custom-button {
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.custom-button:hover {
+  background-color: rgb(190, 0, 0);
 }
 
 .expense-table {
