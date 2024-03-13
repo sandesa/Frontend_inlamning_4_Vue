@@ -24,7 +24,7 @@
             <input
               type="number"
               min="0"
-              step="100"
+              step="any"
               id="priceInput"
               v-model.number="newExpense.price"
             />
@@ -58,8 +58,10 @@
           <result-table
             :categories="categories"
             :all-expenses="expenses"
-            :selected-category="selectedCategory"
             :remove="removeItem"
+            :sort-cat="sortOnCategory"
+            :sort-price="sortOnPrice"
+            :sort-date="sortOnDate"
           ></result-table>
         </div>
       </div>
