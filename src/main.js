@@ -145,18 +145,18 @@ app.component("result-table", {
     <div>
       <div class="filtering">
         <div>
+          <label for="selectMonth" class="selectLabel">Välj månad:</label>
+          <select id="selectMonth" v-model="selectedMonth">
+            <option value="">All</option>
+            <option v-for="(month, index) in months" :key="index+1" :value="index+1">{{month}}</option>
+          </select>
+        </div>
+        <div>
           <label for="selectCategory" class="selectLabel">Välj kategori:</label>
           <select id="selectCategory" v-model="selectedCategory">
             <option value="">None</option>
             <option value="all">All</option>
             <option v-for="(category, index) in categories" :key="index" :value="category">{{category}}</option>
-          </select>
-        </div>
-        <div>
-          <label for="selectMonth" class="selectLabel">Välj månad:</label>
-          <select id="selectMonth" v-model="selectedMonth">
-            <option value="">All</option>
-            <option v-for="(month, index) in months" :key="index+1" :value="index+1">{{month}}</option>
           </select>
         </div>
       </div>
@@ -168,19 +168,29 @@ app.component("result-table", {
             <th><a href="#" @click="sortDate">Datum</a></th>
             <th><a href="#" @click="sortPrice">Kostnad</a></th>
               <th><a href="#" @click="sortCat">Category</a></th>
-              <th>Beskrivning</th>
               <th class="remove-cell"></th>
             </tr>
           </thead>
           <tbody class="expense">
             <template v-for="(exp, index) in filteredExpenses" :key="index"> 
-              <tr>
+              <tr @click="showDescription(exp)" class="info">
               <td>{{exp.date}}</td>
               <td>{{formatPrice(exp.price)}}</td>
                 <td>{{exp.category}}</td>
-                <td>{{exp.desc}}</td>
                 <td class="remove-cell"><button @click="removeExpense(exp)" class="far fa-trash-alt custom-button"></button></td>
               </tr>
+              <template v-if="selectedExpense && selectedExpense === exp">
+                <tr>
+                  <td><b>Beskrivning:</b>
+                    <template v-if="exp.desc.length > 0">
+                      <br><i>{{exp.desc}}</i>
+                    </template>
+                    <template v-else>
+                      <br><i style="color: grey">Tom</i>
+                    </template>
+                  </td>
+                </tr>
+              </template>
             </template>
             <tr class="total">
             <td style="font-weight: bold;">Summa: {{ sum }}</td>
@@ -272,6 +282,8 @@ app.component("result-table", {
     return {
       selectedCategory: "",
       selectedMonth: "",
+      selectedExpense: null,
+      showDesc: false,
       months: [
         "Jan",
         "Feb",
@@ -302,6 +314,9 @@ app.component("result-table", {
         style: "currency",
         currency: "SEK",
       }).format(formattedPrice);
+    },
+    showDescription(exp) {
+      this.selectedExpense = this.selectedExpense === exp ? null : exp;
     },
   },
 });

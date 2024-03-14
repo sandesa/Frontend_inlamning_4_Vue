@@ -106,7 +106,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: green;
 }
 
 .custom-button {
@@ -119,7 +119,7 @@ button[type="submit"]:hover {
 }
 
 .custom-button:hover {
-  background-color: rgb(223, 0, 0);
+  background-color: rgb(75, 12, 12);
 }
 
 .result-table {
@@ -147,6 +147,10 @@ tbody td {
   border-bottom: 1px solid #ddd;
 }
 
+.info:hover {
+  background-color: rgb(226, 226, 226);
+}
+
 .total {
   padding: 10px;
   color: #45a049;
@@ -156,6 +160,7 @@ tbody td {
 #selectCategory,
 #selectMonth {
   margin: 15px;
+  padding: 5px;
 }
 
 #categoryInput {
@@ -165,7 +170,4 @@ tbody td {
 select,
 #descriptionInput {
   border: 1px solid #ccc;
-}
-
-select:hover {
 }
