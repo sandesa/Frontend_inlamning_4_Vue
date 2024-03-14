@@ -21,38 +21,70 @@
 
         <div class="column">
           <form @submit.prevent="addExpense">
-            <label for="priceInput">Price:</label>
-            <input
-              type="number"
-              min="0"
-              step="any"
-              id="priceInput"
-              v-model.number="newExpense.price"
-            />
+            <div class="input">
+              <label for="priceInput">SEK:</label>
+              <input
+                type="number"
+                min="0"
+                step="any"
+                id="priceInput"
+                style="width: 100px"
+                v-model.number="newExpense.price"
+              />
+            </div>
 
-            <label for="dateInput">Date:</label>
-            <input type="date" id="dateInput" v-model="newExpense.date" />
+            <div class="input">
+              <label for="dateInput">Datum:</label>
+              <input
+                type="date"
+                id="dateInput"
+                v-model="newExpense.date"
+                style="
+                  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                "
+              />
+            </div>
 
-            <select id="categoryInput" v-model="newExpense.category">
-              <option value="">--Category--</option>
-              <option
-                v-for="(category, index) in categories"
-                :key="index"
-                :value="category"
+            <div>
+              <select
+                id="categoryInput"
+                v-model="newExpense.category"
+                :class="{ 'color-grey': newExpense.category === '' }"
+                style="
+                  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                "
               >
-                {{category}}
-              </option>
-            </select>
+                <option value="" style="color: grey">Kategori</option>
+                <option
+                  v-for="(category, index) in categories"
+                  :key="index"
+                  :value="category"
+                  style="color: black"
+                >
+                  {{category}}
+                </option>
+              </select>
+            </div>
 
-            <label for="descriptionInput">Description:</label>
-            <textarea
-              id="descriptionInput"
-              cols="30"
-              rows="2"
-              v-model="newExpense.desc"
-              placeholder="Description..."
-            ></textarea>
-            <button type="submit">submit</button>
+            <div>
+              <textarea
+                id="descriptionInput"
+                cols="30"
+                rows="2"
+                v-model="newExpense.desc"
+                placeholder="Beskrivning"
+                style="
+                  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                "
+              ></textarea>
+            </div>
+
+            <div id="add-button-container">
+              <button
+                type="submit"
+                class="fa-solid fa-plus add-button"
+              ></button>
+            </div>
           </form>
 
           <result-table

@@ -13,7 +13,7 @@ let app = Vue.createApp({
         "Övrigt",
       ],
       newExpense: {
-        price: 0,
+        price: "",
         date: "",
         desc: "",
         category: "",
@@ -84,7 +84,7 @@ let app = Vue.createApp({
           desc: this.newExpense.desc,
           category: this.newExpense.category,
         });
-        this.newExpense.price = 0;
+        this.newExpense.price = "";
         this.newExpense.date = "";
         this.newExpense.desc = "";
         this.newExpense.category = "";
@@ -143,44 +143,54 @@ app.component("result-table", {
   ],
   template: `
     <div>
-      <label for="selectCategory">Select a category:</label>
-      <select id="selectCategory" v-model="selectedCategory">
-        <option value="">None</option>
-        <option value="all">All</option>
-        <option v-for="(category, index) in categories" :key="index" :value="category">{{category}}</option>
-      </select>
-
-      <label for="selectMonth">Select month:</label>
-      <select id="selectMonth" v-model="selectedMonth">
-        <option value="">All</option>
-        <option v-for="(month, index) in months" :key="index+1" :value="index+1">{{month}}</option>
-      </select>
+      <div class="filtering">
+        <div>
+          <label for="selectCategory" class="selectLabel">Välj kategori:</label>
+          <select id="selectCategory" v-model="selectedCategory">
+            <option value="">None</option>
+            <option value="all">All</option>
+            <option v-for="(category, index) in categories" :key="index" :value="category">{{category}}</option>
+          </select>
+        </div>
+        <div>
+          <label for="selectMonth" class="selectLabel">Välj månad:</label>
+          <select id="selectMonth" v-model="selectedMonth">
+            <option value="">All</option>
+            <option v-for="(month, index) in months" :key="index+1" :value="index+1">{{month}}</option>
+          </select>
+        </div>
+      </div>
       
-      <table v-if="selectedCategory !== '' || selectedMonth !== ''">
-        <thead>
-          <tr>
-          <th><a href="#" @click="sortDate">Datum</a></th>
-          <th><a href="#" @click="sortPrice">Kostnad</a></th>
-            <th><a href="#" @click="sortCat">Category</a></th>
-            <th>Beskrivning</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody class="expense">
-          <template v-for="(exp, index) in filteredExpenses" :key="index"> 
+      <template v-if="filteredExpenses.length > 0">
+        <table v-if="selectedCategory !== '' || selectedMonth !== ''">
+          <thead>
             <tr>
-            <td>{{exp.date}}</td>
-            <td>{{formatPrice(exp.price)}}</td>
-              <td>{{exp.category}}</td>
-              <td>{{exp.desc}}</td>
-              <td><button @click="removeExpense(exp)" class="far fa-trash-alt custom-button"></button></td>
+            <th><a href="#" @click="sortDate">Datum</a></th>
+            <th><a href="#" @click="sortPrice">Kostnad</a></th>
+              <th><a href="#" @click="sortCat">Category</a></th>
+              <th>Beskrivning</th>
+              <th class="remove-cell"></th>
             </tr>
-          </template>
-          <tr class="total">
-          <td>Total: {{ sum }}</td>
-          </tr>
-          </tbody>
-      </table>
+          </thead>
+          <tbody class="expense">
+            <template v-for="(exp, index) in filteredExpenses" :key="index"> 
+              <tr>
+              <td>{{exp.date}}</td>
+              <td>{{formatPrice(exp.price)}}</td>
+                <td>{{exp.category}}</td>
+                <td>{{exp.desc}}</td>
+                <td class="remove-cell"><button @click="removeExpense(exp)" class="far fa-trash-alt custom-button"></button></td>
+              </tr>
+            </template>
+            <tr class="total">
+            <td style="font-weight: bold;">Summa: {{ sum }}</td>
+            </tr>
+            </tbody>
+        </table>
+      </template>
+      <template v-else>
+      <p style="color: grey; margin-bottom: 15px">Inga utgifter för valda alternativ</p>
+      </template>
     </div>
   `,
   computed: {
@@ -265,11 +275,11 @@ app.component("result-table", {
       months: [
         "Jan",
         "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
+        "Mars",
+        "April",
+        "Maj",
+        "Juni",
+        "Juli",
         "Aug",
         "Sep",
         "Oct",
@@ -294,6 +304,21 @@ app.component("result-table", {
       }).format(formattedPrice);
     },
   },
+});
+
+app.component("pie-chart", {
+  props: ["expenses"],
+  template: `
+    <div>
+      <svg width="300" height="300">
+      </svg>
+    </div>
+  `,
+  data() {
+    return {};
+  },
+  computed: {},
+  methods: {},
 });
 
 app.mount("#app");

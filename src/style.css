@@ -4,9 +4,23 @@
   padding: 0;
 }
 
+html {
+}
+
 body {
   font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 20px;
+}
+
+::placeholder {
+  position: fixed;
+  top: 25%;
+  left: 33%;
+  font-style: italic;
+}
+
+textarea {
+  min-height: 40px;
 }
 
 .container {
@@ -18,6 +32,19 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.remove-cell {
+  width: 41px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: grey;
+}
+
 h1 {
   text-align: center;
   margin-bottom: 20px;
@@ -25,12 +52,18 @@ h1 {
 
 form {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   margin-bottom: 20px;
 }
 
+#add-button-container {
+  display: flex;
+}
+
 label {
-  margin: auto;
+  margin-right: 15px;
+  font-weight: bold;
+  align-self: center;
 }
 
 input {
@@ -38,6 +71,28 @@ input {
   border: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
+}
+
+.color-grey {
+  color: gray;
+}
+
+p {
+  text-align: center;
+}
+
+#categoryInput,
+#priceInput {
+  height: 40px;
+}
+
+.filtering {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.selectLabel {
+  margin-left: 0px;
 }
 
 button[type="submit"] {
@@ -72,7 +127,7 @@ button[type="submit"]:hover {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 table {
@@ -84,6 +139,7 @@ thead th {
   background-color: #f2f2f2;
   padding: 10px;
   text-align: left;
+  font-size: 18px;
 }
 
 tbody td {
@@ -104,4 +160,12 @@ tbody td {
 
 #categoryInput {
   margin-left: auto;
+}
+
+select,
+#descriptionInput {
+  border: 1px solid #ccc;
+}
+
+select:hover {
 }
