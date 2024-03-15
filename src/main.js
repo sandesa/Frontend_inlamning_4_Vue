@@ -326,16 +326,39 @@ app.component("result-table", {
 app.component("pie-chart", {
   props: ["expenses"],
   template: `
-    <div>
-      <svg width="300" height="300">
-      </svg>
-    </div>
+      <div>
+          <svg width="300" height="300">
+              <g :transform="'translate(' + width / 2 + ',' + height / 2 + ')'">
+                  <template v-for="(expense, index) in expenses">
+                      <path :d="generateArc(expense, index)" :fill="color(index)" />
+                      <text :transform="generateTextTransform(index)" text-anchor="middle">{{ expense.category }}</text>
+                  </template>
+              </g>
+          </svg>
+      </div>
   `,
   data() {
-    return {};
+    return {
+      width: 300,
+      height: 300,
+      radius: Math.min(300, 300) / 2,
+      color: d3.scaleOrdinal(d3.schemeCategory10),
+    };
   },
-  computed: {},
-  methods: {},
+  methods: {
+    generateArc(expense, index) {
+      const pie = d3.pie().value((d) => d.price);
+      const arc = d3.arc().innerRadius(0).outerRadius(this.radius);
+      const arcs = pie(this.expenses);
+      return arc(arcs[index]);
+    },
+    generateTextTransform(index) {
+      const pie = d3.pie().value((d) => d.price);
+      const arc = d3.arc().innerRadius(0).outerRadius(this.radius);
+      const arcs = pie(this.expenses);
+      return `translate(${arc.centroid(arcs[index])})`;
+    },
+  },
 });
 
 app.mount("#app");
