@@ -329,9 +329,9 @@ app.component("pie-chart", {
       <div>
           <svg width="300" height="300">
               <g :transform="'translate(' + width / 2 + ',' + height / 2 + ')'">
-                  <template v-for="(expense, index) in expenses">
-                      <path :d="generateArc(expense, index)" :fill="color(index)" />
-                      <text :transform="generateTextTransform(index)" text-anchor="middle">{{ expense.category }}</text>
+                  <template v-for="(categoryExpense, index) in categoryExpenses">
+                      <path :d="generateArc(categoryExpense, index)" :fill="color(index)" />
+                      <text :transform="generateTextTransform(index)" text-anchor="middle">{{ categoryExpense.category }}</text>
                   </template>
               </g>
           </svg>
@@ -343,19 +343,48 @@ app.component("pie-chart", {
       height: 300,
       radius: Math.min(300, 300) / 2,
       color: d3.scaleOrdinal(d3.schemeCategory10),
+      categoryExpenses: [],
     };
   },
+  watch: {
+    expenses: {
+      handler: function (newExpenses, oldExpenses) {
+        this.calculateCategoryExpenses();
+      },
+      deep: true,
+    },
+  },
+  created() {
+    this.calculateCategoryExpenses();
+  },
   methods: {
-    generateArc(expense, index) {
+    calculateCategoryExpenses() {
+      let categoryExpenses = [];
+      this.expenses.forEach((expense) => {
+        let index = categoryExpenses.findIndex(
+          (item) => item.category === expense.category
+        );
+        if (index !== -1) {
+          categoryExpenses[index].price += expense.price;
+        } else {
+          categoryExpenses.push({
+            category: expense.category,
+            price: expense.price,
+          });
+        }
+      });
+      this.categoryExpenses = categoryExpenses;
+    },
+    generateArc(categoryExpense, index) {
       const pie = d3.pie().value((d) => d.price);
       const arc = d3.arc().innerRadius(0).outerRadius(this.radius);
-      const arcs = pie(this.expenses);
+      const arcs = pie(this.categoryExpenses);
       return arc(arcs[index]);
     },
     generateTextTransform(index) {
       const pie = d3.pie().value((d) => d.price);
       const arc = d3.arc().innerRadius(0).outerRadius(this.radius);
-      const arcs = pie(this.expenses);
+      const arcs = pie(this.categoryExpenses);
       return `translate(${arc.centroid(arcs[index])})`;
     },
   },
