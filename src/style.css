@@ -109,6 +109,7 @@ input:focus {
 .filtering {
   display: flex;
   justify-content: space-evenly;
+  background-color: #1c3334;
 }
 
 .selectLabel {

@@ -306,6 +306,7 @@ app.component("result-table", {
       const index = this.allExpenses.indexOf(expense);
       if (index !== -1) {
         this.remove(index);
+        this.selectedExpense = null;
       }
     },
     formatPrice(exp) {
