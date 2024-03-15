@@ -55,6 +55,7 @@
                 :class="{ 'color-grey': newExpense.category === '' }"
                 style="
                   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                  text-align: center;
                 "
               >
                 <option value="" style="color: grey">Kategori</option>
@@ -62,7 +63,7 @@
                   v-for="(category, index) in categories"
                   :key="index"
                   :value="category"
-                  style="color: black"
+                  style="color: #1c3334"
                 >
                   {{category}}
                 </option>

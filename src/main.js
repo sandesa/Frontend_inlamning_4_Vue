@@ -190,8 +190,11 @@ app.component("result-table", {
                 </tr>
               </template>
             </template>
-            <tr class="total">
-            <td style="font-weight: bold;">Summa: {{sum}}</td>
+            <tr class="total" style="background-color: #1c3334">
+            <td></td>
+            <td style="font-weight: bold; text-align: center">Totalt: {{sum}}</td>
+            <td></td>
+            <td></td>
             </tr>
             </tbody>
         </table>

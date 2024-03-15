@@ -22,7 +22,8 @@ body {
 }
 
 textarea {
-  min-height: 40px;
+  height: 40px;
+  padding: 5px;
 }
 
 .container {
@@ -95,6 +96,11 @@ p {
   text-align: center;
 }
 
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
 #categoryInput,
 #priceInput {
   height: 40px;
@@ -155,6 +161,7 @@ thead th {
   padding: 10px;
   text-align: left;
   font-size: 18px;
+  background-color: #1c3334;
 }
 
 tbody td {
