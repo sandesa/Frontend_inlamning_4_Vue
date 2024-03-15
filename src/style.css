@@ -5,6 +5,8 @@
 }
 
 html {
+  background-color: #1c3334;
+  color: #a0d3d4;
 }
 
 body {
@@ -26,7 +28,7 @@ textarea {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  background-color: #f9f9f9;
+  background-color: #2f4454;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -38,7 +40,7 @@ textarea {
 
 a {
   text-decoration: none;
-  color: black;
+  color: #da7b93;
 }
 
 a:hover {
@@ -47,7 +49,11 @@ a:hover {
 
 h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-top: 60px;
+  margin-bottom: 50px;
+  font-size: 4rem;
+  font-weight: normal;
+  color: #da7b93;
 }
 
 form {
@@ -64,17 +70,25 @@ label {
   margin-right: 15px;
   font-weight: bold;
   align-self: center;
+  font-size: 18px;
 }
 
 input {
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
   outline: none;
 }
 
+input,
+select,
+textarea {
+  background-color: #a0d3d4;
+  border-radius: 4px;
+  border: 1px solid #a0d3d4;
+  color: #1c3334;
+}
+
 .color-grey {
-  color: gray;
+  color: grey;
 }
 
 p {
@@ -97,7 +111,7 @@ p {
 
 button[type="submit"] {
   padding: 10px 20px;
-  background-color: #4caf50;
+  background-color: #0a920e;
   color: white;
   border: none;
   border-radius: 4px;
@@ -106,12 +120,12 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: green;
+  background-color: rgb(122, 153, 122);
 }
 
 .custom-button {
-  background-color: red;
-  color: white;
+  background-color: #da7b93;
+  color: #2e151b;
   padding: 5px 10px;
   border: none;
   border-radius: 5px;
@@ -119,15 +133,15 @@ button[type="submit"]:hover {
 }
 
 .custom-button:hover {
-  background-color: rgb(75, 12, 12);
+  background-color: #2e151b;
+  color: #da7b93;
 }
 
 .result-table {
-  border: 1px solid #ddd;
+  border: 1px solid #638383;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* font-weight: bold; */
 }
 
 table {
@@ -136,7 +150,8 @@ table {
 }
 
 thead th {
-  background-color: #f2f2f2;
+  border-top: 1px solid #638383;
+  border-bottom: 1px solid #638383;
   padding: 10px;
   text-align: left;
   font-size: 18px;
@@ -144,16 +159,20 @@ thead th {
 
 tbody td {
   padding: 10px;
-  border-bottom: 1px solid #ddd;
+}
+
+tr:nth-last-child(2) {
+  border-bottom: 1px solid #638383;
 }
 
 .info:hover {
-  background-color: rgb(226, 226, 226);
+  background-color: #a0d3d4;
+  color: #1c3334;
 }
 
 .total {
   padding: 10px;
-  color: #45a049;
+  color: #a0d3d4;
   font-size: 18px;
 }
 
@@ -169,5 +188,4 @@ tbody td {
 
 select,
 #descriptionInput {
-  border: 1px solid #ccc;
 }

@@ -88,8 +88,6 @@ let app = Vue.createApp({
         this.newExpense.date = "";
         this.newExpense.desc = "";
         this.newExpense.category = "";
-      } else {
-        alert("Ej korrekt input");
       }
     },
     removeItem(index) {
@@ -165,25 +163,25 @@ app.component("result-table", {
         <table v-if="selectedCategory !== '' || selectedMonth !== ''">
           <thead>
             <tr>
-            <th><a href="#" @click="sortDate">Datum</a></th>
-            <th><a href="#" @click="sortPrice">Kostnad</a></th>
-              <th><a href="#" @click="sortCat">Category</a></th>
+              <th><a href="#" @click="sortDate">Datum</a></th>
+              <th style="text-align: center"><a href="#" @click="sortPrice">Kostnad</a></th>
+              <th style="text-align: center"><a href="#" @click="sortCat">Category</a></th>
               <th class="remove-cell"></th>
             </tr>
           </thead>
           <tbody class="expense">
             <template v-for="(exp, index) in filteredExpenses" :key="index"> 
               <tr @click="showDescription(exp)" class="info">
-              <td>{{exp.date}}</td>
-              <td>{{formatPrice(exp.price)}}</td>
-                <td>{{exp.category}}</td>
+                <td>{{exp.date}}</td>
+                <td style="text-align: center">{{formatPrice(exp.price)}}</td>
+                <td style="text-align: center">{{exp.category}}</td>
                 <td class="remove-cell"><button @click="removeExpense(exp)" class="far fa-trash-alt custom-button"></button></td>
               </tr>
               <template v-if="selectedExpense && selectedExpense === exp">
                 <tr>
-                  <td><b>Beskrivning:</b>
+                  <td><b style="color: #da7b93">Beskrivning:</b>
                     <template v-if="exp.desc.length > 0">
-                      <br><i>{{exp.desc}}</i>
+                      <br><i style="color: grey">{{exp.desc}}</i>
                     </template>
                     <template v-else>
                       <br><i style="color: grey">Tom</i>
@@ -193,7 +191,7 @@ app.component("result-table", {
               </template>
             </template>
             <tr class="total">
-            <td style="font-weight: bold;">Summa: {{ sum }}</td>
+            <td style="font-weight: bold;">Summa: {{sum}}</td>
             </tr>
             </tbody>
         </table>

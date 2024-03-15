@@ -24,6 +24,7 @@
             <div class="input">
               <label for="priceInput">SEK:</label>
               <input
+                required
                 type="number"
                 min="0"
                 step="any"
@@ -36,6 +37,7 @@
             <div class="input">
               <label for="dateInput">Datum:</label>
               <input
+                required
                 type="date"
                 id="dateInput"
                 v-model="newExpense.date"
@@ -47,6 +49,7 @@
 
             <div>
               <select
+                required
                 id="categoryInput"
                 v-model="newExpense.category"
                 :class="{ 'color-grey': newExpense.category === '' }"
