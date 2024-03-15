@@ -171,10 +171,10 @@ app.component("result-table", {
           </thead>
           <tbody class="expense">
             <template v-for="(exp, index) in filteredExpenses" :key="index"> 
-              <tr @click="showDescription(exp)" class="info">
-                <td>{{exp.date}}</td>
-                <td style="text-align: center">{{formatPrice(exp.price)}}</td>
-                <td style="text-align: center">{{exp.category}}</td>
+              <tr class="info">
+                <td @click="showDescription(exp)" style="width: 300px">{{exp.date}}</td>
+                <td @click="showDescription(exp)" style="text-align: center">{{formatPrice(exp.price)}}</td>
+                <td @click="showDescription(exp)" style="text-align: center">{{exp.category}}</td>
                 <td class="remove-cell"><button @click="removeExpense(exp)" class="far fa-trash-alt custom-button"></button></td>
               </tr>
               <template v-if="selectedExpense && selectedExpense === exp">
