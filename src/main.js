@@ -14,7 +14,7 @@ let app = Vue.createApp({
       ],
       newExpense: {
         price: "",
-        date: "",
+        date: "2024-03-20",
         desc: "",
         category: "",
       },
@@ -85,7 +85,7 @@ let app = Vue.createApp({
           category: this.newExpense.category,
         });
         this.newExpense.price = "";
-        this.newExpense.date = "";
+        this.newExpense.date = "2024-03-20";
         this.newExpense.desc = "";
         this.newExpense.category = "";
       }
@@ -191,8 +191,8 @@ app.component("result-table", {
               </template>
             </template>
             <tr class="total" style="background-color: #1c3334">
+            <td style="font-weight: bold;">Totalt: {{sum}}</td>
             <td></td>
-            <td style="font-weight: bold; text-align: center">Totalt: {{sum}}</td>
             <td></td>
             <td></td>
             </tr>
