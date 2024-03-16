@@ -18,6 +18,7 @@ let app = Vue.createApp({
         desc: "",
         category: "",
       },
+      userData: [],
       expenses: [],
     };
   },
@@ -26,16 +27,14 @@ let app = Vue.createApp({
       const response = await fetch('/src/data.json');
       this.expenses = await response.json();
     } catch (error) {
-      console.error('Ett fel inträffad med datan:', error)
+      console.error('Ett fel inträffad med inmatning av exempel datan:', error)
+    }
+    const storedExpenses = localStorage.getItem('user-data');
+    if (storedExpenses) {
+      this.newExpense = JSON.parse(storedExpenses);
     }
   },
   computed: {},
-  created() {
-    const storedExpenses = localStorage.getItem('expenses');
-    if (storedExpenses) {
-      this.expenses = JSON.parse(storedExpenses);
-    }
-  },
   methods: {
     addExpense() {
       if (
@@ -49,16 +48,25 @@ let app = Vue.createApp({
           desc: this.newExpense.desc,
           category: this.newExpense.category,
         });
+        this.userData.push({
+          price: Math.round(this.newExpense.price * 100) / 100,
+          date: this.newExpense.date,
+          desc: this.newExpense.desc,
+          category: this.newExpense.category,
+        });
+        localStorage.setItem('user-data', JSON.stringify(this.newExpense));
         this.newExpense.price = "";
         this.newExpense.date = "2024-03-20";
         this.newExpense.desc = "";
         this.newExpense.category = "";
 
-        localStorage.setItem('expenses', JSON.stringify(this.expenses));
       }
     },
     removeItem(index) {
       this.expenses.splice(index, 1);
+      let temp = this.userData.indexOf(this.expenses[index]);
+      this.userData.splice(temp, 1);
+      localStorage.setItem('user-data', JSON.stringify(this.userData));
     },
     sortOnCategory() {
       this.descCat = !this.descCat;
