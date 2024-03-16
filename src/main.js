@@ -24,12 +24,12 @@ let app = Vue.createApp({
   },
   async created() {
     try {
-      const response = await fetch('/src/data.json');
+      const response = await fetch("/src/data.json");
       this.expenses = await response.json();
     } catch (error) {
-      console.error('Ett fel inträffad med inmatning av exempel datan:', error)
+      console.error("Ett fel inträffad med inmatning av exempel datan:", error);
     }
-    const storedExpenses = localStorage.getItem('user-data');
+    const storedExpenses = localStorage.getItem("user-data");
     if (storedExpenses) {
       this.newExpense = JSON.parse(storedExpenses);
     }
@@ -54,19 +54,18 @@ let app = Vue.createApp({
           desc: this.newExpense.desc,
           category: this.newExpense.category,
         });
-        localStorage.setItem('user-data', JSON.stringify(this.newExpense));
+        localStorage.setItem("user-data", JSON.stringify(this.newExpense));
         this.newExpense.price = "";
         this.newExpense.date = "2024-03-20";
         this.newExpense.desc = "";
         this.newExpense.category = "";
-
       }
     },
     removeItem(index) {
       this.expenses.splice(index, 1);
       let temp = this.userData.indexOf(this.expenses[index]);
       this.userData.splice(temp, 1);
-      localStorage.setItem('user-data', JSON.stringify(this.userData));
+      localStorage.setItem("user-data", JSON.stringify(this.userData));
     },
     sortOnCategory() {
       this.descCat = !this.descCat;
@@ -305,11 +304,14 @@ app.component("pie-chart", {
           <svg width="300" height="300">
               <g :transform="'translate(' + width / 2 + ',' + height / 2 + ')'">
                   <template v-for="(categoryExpense, index) in categoryExpenses">
-                      <path :d="generateArc(categoryExpense, index)" :fill="color(index)" />
+                      <path :d="generateArc(categoryExpense, index)" :fill="color(categoryExpense.category)" />
                       <text :transform="generateTextTransform(index)" text-anchor="middle">{{ categoryExpense.category }}</text>
                   </template>
               </g>
           </svg>
+          <div class="Pie-P" v-for="(categoryExpense, index) in categoryExpenses" :key="index">
+              {{ categoryExpense.category }}: {{ categoryExpense.percentage.toFixed(2) }}%
+          </div>
       </div>
   `,
   data() {
@@ -317,7 +319,14 @@ app.component("pie-chart", {
       width: 300,
       height: 300,
       radius: Math.min(300, 300) / 2,
-      color: d3.scaleOrdinal(d3.schemeCategory10),
+      colorMap: {
+        Bostad: "#519DE9",
+        Hushåll: "#7CC674",
+        "Mat & dryck": "#73C5C5",
+        Transport: "#8481DD",
+        "Nöje & shopping": "#F6D173",
+        Övrigt: "#2e8561",
+      },
       categoryExpenses: [],
     };
   },
@@ -335,7 +344,10 @@ app.component("pie-chart", {
   methods: {
     calculateCategoryExpenses() {
       let categoryExpenses = [];
+      let totalExpenses = 0;
+
       this.expenses.forEach((expense) => {
+        totalExpenses += expense.price;
         let index = categoryExpenses.findIndex(
           (item) => item.category === expense.category
         );
@@ -348,7 +360,13 @@ app.component("pie-chart", {
           });
         }
       });
-      this.categoryExpenses = categoryExpenses;
+
+      this.categoryExpenses = categoryExpenses.map((expense) => ({
+        ...expense,
+        percentage: (expense.price / totalExpenses) * 100,
+      }));
+
+      this.totalExpenses = totalExpenses;
     },
     generateArc(categoryExpense, index) {
       const pie = d3.pie().value((d) => d.price);
@@ -361,6 +379,9 @@ app.component("pie-chart", {
       const arc = d3.arc().innerRadius(0).outerRadius(this.radius);
       const arcs = pie(this.categoryExpenses);
       return `translate(${arc.centroid(arcs[index])})`;
+    },
+    color(category) {
+      return this.colorMap[category] || "black";
     },
   },
 });
