@@ -1,6 +1,6 @@
 [
     {
-      "price": 100.32,
+      "price": 5100.32,
       "date": "2024-04-10",
       "desc": "",
       "category": "Bostad"
@@ -12,7 +12,7 @@
       "category": "Bostad"
     },
     {
-      "price": 5511.1,
+      "price": 2511.1,
       "date": "2024-02-11",
       "desc": "",
       "category": "Hushåll"
@@ -24,19 +24,19 @@
       "category": "Övrigt"
     },
     {
-      "price": 100.02,
+      "price": 500.02,
       "date": "2024-03-10",
       "desc": "",
       "category": "Transport"
     },
     {
-      "price": 10.04,
+      "price": 7700.04,
       "date": "2024-03-11",
       "desc": "",
       "category": "Nöje & shopping"
     },
     {
-      "price": 100.35,
+      "price": 250.35,
       "date": "2024-01-11",
       "desc": "Random desc",
       "category": "Bostad"
