@@ -196,6 +196,12 @@ tr:nth-last-child(2) {
 }
 
 select,
-#descriptionInput {}
+#descriptionInput {
+}
 
-pie-chart {}
+.pie-chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
