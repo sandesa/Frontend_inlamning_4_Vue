@@ -140,7 +140,7 @@ app.component("result-table", {
                 <tr>
                   <td><b style="color: #da7b93">Beskrivning:</b>
                     <template v-if="exp.desc.length > 0">
-                      <br><i style="color: grey">{{exp.desc}}</i>
+                      <br><i style="color: grey" id="test-desc">{{exp.desc}}</i>
                     </template>
                     <template v-else>
                       <br><i style="color: grey">Tom</i>
