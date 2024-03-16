@@ -300,7 +300,7 @@ app.component("result-table", {
 app.component("pie-chart", {
   props: ["expenses"],
   template: `
-      <div>
+    <div id="pie-container">
           <svg width="300" height="300">
               <g :transform="'translate(' + width / 2 + ',' + height / 2 + ')'">
                   <template v-for="(categoryExpense, index) in categoryExpenses">
@@ -310,7 +310,7 @@ app.component("pie-chart", {
               </g>
           </svg>
           <div class="Pie-P" v-for="(categoryExpense, index) in categoryExpenses" :key="index">
-              {{ categoryExpense.category }}: {{ categoryExpense.percentage.toFixed(2) }}%
+              {{ categoryExpense.category }}: {{ categoryExpense.percentage.toFixed(2) }}% 
           </div>
       </div>
   `,

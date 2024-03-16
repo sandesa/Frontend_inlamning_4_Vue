@@ -203,9 +203,44 @@ select,
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin: 20px;
 }
 
-div.Pie-P {
+.Pie-P {
   font-size: 20px;
+  margin: 5px;
+  align-items: center;
+}
+
+@media only screen and (max-width: 868px) {
+  .container {
+    padding: 10px;
+  }
+
+  form {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    margin-bottom: 10px; /* Add margin between stacked inputs */
+  }
+
+  #add-button-container {
+    margin-top: 10px;
+  }
+
+  #selectCategory,
+  #selectMonth {
+    margin: 10px 0;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 3rem;
+  }
 }
