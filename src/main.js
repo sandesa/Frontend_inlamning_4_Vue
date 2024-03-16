@@ -31,7 +31,8 @@ let app = Vue.createApp({
     }
     const storedExpenses = localStorage.getItem('user-data');
     if (storedExpenses) {
-      this.newExpense = JSON.parse(storedExpenses);
+      this.userData = JSON.parse(storedExpenses);
+      this.expenses = [...this.expenses, ...this.userData]
     }
   },
   computed: {},
@@ -54,7 +55,7 @@ let app = Vue.createApp({
           desc: this.newExpense.desc,
           category: this.newExpense.category,
         });
-        localStorage.setItem('user-data', JSON.stringify(this.newExpense));
+        localStorage.setItem('user-data', JSON.stringify(this.userData));
         this.newExpense.price = "";
         this.newExpense.date = "2024-03-20";
         this.newExpense.desc = "";
@@ -62,11 +63,16 @@ let app = Vue.createApp({
 
       }
     },
-    removeItem(index) {
-      this.expenses.splice(index, 1);
-      let temp = this.userData.indexOf(this.expenses[index]);
-      this.userData.splice(temp, 1);
-      localStorage.setItem('user-data', JSON.stringify(this.userData));
+    removeItem(expense) {
+      const index = this.expenses.findIndex(exp => exp === expense);
+      if (index !== -1) {
+        this.expenses.splice(index, 1);
+        if (this.userData.includes(expense)) {
+          const userDataIndex = this.userData.findIndex(exp => exp === expense);
+          this.userData.splice(userDataIndex, 1);
+          localStorage.setItem('user-data', JSON.stringify(this.userData));
+        }
+      }
     },
     sortOnCategory() {
       this.descCat = !this.descCat;
@@ -280,7 +286,7 @@ app.component("result-table", {
     removeExpense(expense) {
       const index = this.allExpenses.indexOf(expense);
       if (index !== -1) {
-        this.remove(index);
+        this.remove(expense);
         this.selectedExpense = null;
       }
     },

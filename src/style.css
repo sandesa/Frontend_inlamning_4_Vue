@@ -195,10 +195,6 @@ tr:nth-last-child(2) {
   margin-left: auto;
 }
 
-select,
-#descriptionInput {
-}
-
 .pie-chart-container {
   display: flex;
   justify-content: center;
