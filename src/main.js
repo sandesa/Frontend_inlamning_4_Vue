@@ -18,8 +18,7 @@ let app = Vue.createApp({
         desc: "",
         category: "",
       },
-      expenses: [
-      ],
+      expenses: [],
     };
   },
   async created() {
