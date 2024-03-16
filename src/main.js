@@ -26,7 +26,7 @@ let app = Vue.createApp({
       const response = await fetch('/src/data.json');
       this.expenses = await response.json();
     } catch (error) {
-      console.error('Error fetching data:', error)
+      console.error('Ett fel inträffad med datan:', error)
     }
   },
   computed: {},

@@ -69,3 +69,26 @@ test('First add then remove expense', async ({ page }) => {
     expect(finalCount).toBe(afterAddedExpense - 1);
 });
 
+test('Filtering', async ({page}) => {
+    await page.selectOption('#selectCategory', 'All');
+    let count = await page.evaluate(() => {
+        return document.querySelectorAll('.info').length;
+    });
+    expect(count).toBe(8);
+    await page.selectOption('#selectCategory', 'Bostad');
+    count = await page.evaluate(() => {
+        return document.querySelectorAll('.info').length;
+    });
+    expect(count).toBe(3);
+    await page.selectOption('#selectMonth', 'Jan');
+    count = await page.evaluate(() => {
+        return document.querySelectorAll('.info').length;
+    });
+    expect(count).toBe(1);
+    await page.selectOption('#selectCategory', 'All');
+    count = await page.evaluate(() => {
+        return document.querySelectorAll('.info').length;
+    });
+    expect(count).toBe(2);
+});
+
