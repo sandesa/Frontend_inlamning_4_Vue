@@ -93,6 +93,7 @@ textarea {
 }
 
 p {
+  background-color: #1c3334;
   text-align: center;
 }
 
@@ -195,8 +196,6 @@ tr:nth-last-child(2) {
 }
 
 select,
-#descriptionInput {
-}
+#descriptionInput {}
 
-pie-chart {
-}
+pie-chart {}

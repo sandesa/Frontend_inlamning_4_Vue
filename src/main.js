@@ -30,6 +30,12 @@ let app = Vue.createApp({
     }
   },
   computed: {},
+  created() {
+    const storedExpenses = localStorage.getItem('expenses');
+    if (storedExpenses) {
+      this.expenses = JSON.parse(storedExpenses);
+    }
+  },
   methods: {
     addExpense() {
       if (
@@ -47,6 +53,8 @@ let app = Vue.createApp({
         this.newExpense.date = "2024-03-20";
         this.newExpense.desc = "";
         this.newExpense.category = "";
+
+        localStorage.setItem('expenses', JSON.stringify(this.expenses));
       }
     },
     removeItem(index) {
@@ -159,7 +167,7 @@ app.component("result-table", {
         </table>
       </template>
       <template v-else>
-      <p style="color: grey; margin-bottom: 15px">Inga utgifter för valda alternativ</p>
+      <p style="color: grey; padding-bottom: 15px">Inga utgifter för valda alternativ</p>
       </template>
     </div>
   `,
