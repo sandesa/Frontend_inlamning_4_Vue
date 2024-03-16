@@ -19,56 +19,16 @@ let app = Vue.createApp({
         category: "",
       },
       expenses: [
-        {
-          price: 100.32,
-          date: "2024-04-10",
-          desc: "",
-          category: "Bostad",
-        },
-        {
-          price: 1001.01,
-          date: "2024-03-11",
-          desc: "",
-          category: "Bostad",
-        },
-        {
-          price: 10011.1,
-          date: "2024-02-11",
-          desc: "",
-          category: "Hushåll",
-        },
-        {
-          price: 1100.2,
-          date: "2024-03-11",
-          desc: "",
-          category: "Övrigt",
-        },
-        {
-          price: 100.02,
-          date: "2024-03-10",
-          desc: "",
-          category: "Transport",
-        },
-        {
-          price: 10.04,
-          date: "2024-03-11",
-          desc: "",
-          category: "Nöje & shopping",
-        },
-        {
-          price: 100.35,
-          date: "2024-01-11",
-          desc: "Random desc",
-          category: "Bostad",
-        },
-        {
-          price: 220.98,
-          date: "2024-01-11",
-          desc: "Random desc",
-          category: "Transport",
-        },
       ],
     };
+  },
+  async created() {
+    try {
+      const response = await fetch('/src/data.json');
+      this.expenses = await response.json();
+    } catch (error) {
+      console.error('Error fetching data:', error)
+    }
   },
   computed: {},
   methods: {
