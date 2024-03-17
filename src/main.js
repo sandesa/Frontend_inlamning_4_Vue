@@ -66,8 +66,13 @@ let app = Vue.createApp({
       const index = this.expenses.findIndex(exp => exp === expense);
       if (index !== -1) {
         this.expenses.splice(index, 1);
-        if (this.userData.includes(expense)) {
-          const userDataIndex = this.userData.findIndex(exp => exp === expense);
+        const userDataIndex = this.userData.findIndex(exp => 
+          exp.price === expense.price &&
+          exp.date === expense.date &&
+          exp.desc === expense.desc &&
+          exp.category === expense.category
+        );
+        if (userDataIndex !== -1) {
           this.userData.splice(userDataIndex, 1);
           localStorage.setItem('user-data', JSON.stringify(this.userData));
         }
