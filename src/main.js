@@ -176,17 +176,22 @@ app.component("result-table", {
               </template>
             </template>
             <tr class="total" style="background-color: #1c3334">
-            <td style="font-weight: bold;">Totalt: {{sum}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+              <td style="font-weight: bold;">Totalt: {{sum}}</td>
+              <td></td>
+              <td></td>
+              <td></td>
             </tr>
-            </tbody>
+          </tbody>
         </table>
-      </template>
-      <template v-else>
-      <p style="color: grey; padding-bottom: 15px">Inga utgifter för valda alternativ</p>
-      </template>
+          <template v-if="selectedCategory !== '' || selectedMonth !== ''">
+            <div class="pie-chart-container">
+              <pie-chart :expenses="filteredExpenses"></pie-chart>
+            </div>
+          </template>
+        </template>
+        <template v-else>
+          <p style="color: grey; padding-bottom: 15px">Inga utgifter för valda alternativ</p>
+        </template>
     </div>
   `,
   computed: {
@@ -291,7 +296,6 @@ app.component("result-table", {
       const index = this.allExpenses.indexOf(expense);
       if (index !== -1) {
         this.remove(expense);
-        this.selectedExpense = null;
       }
     },
     formatPrice(exp) {
@@ -372,10 +376,13 @@ app.component("pie-chart", {
         }
       });
 
-      this.categoryExpenses = categoryExpenses.map((expense) => ({
-        ...expense,
-        percentage: (expense.price / totalExpenses) * 100,
-      }));
+      categoryExpenses.forEach((expense) => {
+        expense.percentage = (expense.price / totalExpenses) * 100;
+      });
+
+      categoryExpenses.sort((a, b) => b.percentage - a.percentage);
+
+      this.categoryExpenses = categoryExpenses;
 
       this.totalExpenses = totalExpenses;
     },
