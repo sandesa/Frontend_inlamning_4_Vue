@@ -32,7 +32,7 @@ let app = Vue.createApp({
     const storedExpenses = localStorage.getItem("user-data");
     if (storedExpenses) {
       this.userData = JSON.parse(storedExpenses);
-      this.expenses = [...this.expenses, ...this.userData]
+      this.expenses = [...this.expenses, ...this.userData];
     }
   },
   computed: {},
@@ -55,7 +55,7 @@ let app = Vue.createApp({
           desc: this.newExpense.desc,
           category: this.newExpense.category,
         });
-        localStorage.setItem('user-data', JSON.stringify(this.userData));
+        localStorage.setItem("user-data", JSON.stringify(this.userData));
         this.newExpense.price = "";
         this.newExpense.date = "2024-03-20";
         this.newExpense.desc = "";
@@ -63,18 +63,19 @@ let app = Vue.createApp({
       }
     },
     removeItem(expense) {
-      const index = this.expenses.findIndex(exp => exp === expense);
+      const index = this.expenses.findIndex((exp) => exp === expense);
       if (index !== -1) {
         this.expenses.splice(index, 1);
-        const userDataIndex = this.userData.findIndex(exp => 
-          exp.price === expense.price &&
-          exp.date === expense.date &&
-          exp.desc === expense.desc &&
-          exp.category === expense.category
+        const userDataIndex = this.userData.findIndex(
+          (exp) =>
+            exp.price === expense.price &&
+            exp.date === expense.date &&
+            exp.desc === expense.desc &&
+            exp.category === expense.category
         );
         if (userDataIndex !== -1) {
           this.userData.splice(userDataIndex, 1);
-          localStorage.setItem('user-data', JSON.stringify(this.userData));
+          localStorage.setItem("user-data", JSON.stringify(this.userData));
         }
       }
     },
@@ -150,7 +151,7 @@ app.component("result-table", {
             <tr>
               <th><a href="#" @click="sortDate">Datum</a></th>
               <th style="text-align: center"><a href="#" @click="sortPrice">Kostnad</a></th>
-              <th style="text-align: center"><a href="#" @click="sortCat">Category</a></th>
+              <th style="text-align: center"><a href="#" @click="sortCat">Kategori</a></th>
               <th class="remove-cell"></th>
             </tr>
           </thead>
