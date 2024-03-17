@@ -50,9 +50,9 @@ a:hover {
 
 h1 {
   text-align: center;
-  margin-top: 60px;
+  margin-top: 45px;
   margin-bottom: 50px;
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: normal;
   color: #da7b93;
 }
@@ -201,7 +201,7 @@ tr:last-child {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .color-square {
@@ -209,4 +209,59 @@ tr:last-child {
   width: 10px;
   height: 10px;
   margin-right: 5px;
+}
+
+.Pie-P {
+  margin: 5px;
+  align-items: center;
+}
+
+@media only screen and (max-width: 915px) {
+  .container {
+    padding: 10px;
+  }
+
+  form {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  #dateInput {
+    width: 100px;
+  }
+
+  #add-button-container {
+    margin-top: 10px;
+  }
+
+  #selectCategory,
+  #selectMonth {
+    margin: 10px 0;
+  }
+
+  .filtering div {
+    padding-top: 10px;
+  }
+
+  @media only screen and (max-width: 520px) {
+    h1 {
+      font-size: 3rem;
+    }
+
+    .filtering div {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .filtering div:first-child {
+      padding-right: 0px;
+    }
+  }
 }
