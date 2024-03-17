@@ -201,3 +201,10 @@ tr:nth-last-child(2) {
   align-items: center;
   margin-top: 20px;
 }
+
+.color-square {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+}

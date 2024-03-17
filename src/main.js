@@ -311,19 +311,19 @@ app.component("result-table", {
 app.component("pie-chart", {
   props: ["expenses"],
   template: `
-    <div id="pie-container">
-          <svg width="300" height="300">
-              <g :transform="'translate(' + width / 2 + ',' + height / 2 + ')'">
-                  <template v-for="(categoryExpense, index) in categoryExpenses">
-                      <path :d="generateArc(categoryExpense, index)" :fill="color(categoryExpense.category)" />
-                      <text :transform="generateTextTransform(index)" text-anchor="middle">{{ categoryExpense.category }}</text>
-                  </template>
-              </g>
-          </svg>
-          <div class="Pie-P" v-for="(categoryExpense, index) in categoryExpenses" :key="index">
-              {{ categoryExpense.category }}: {{ categoryExpense.percentage.toFixed(2) }}% 
-          </div>
-      </div>
+  <div id="pie-container">
+    <svg width="300" height="300">
+      <g :transform="'translate(' + width / 2 + ',' + height / 2 + ')'">
+        <template v-for="(categoryExpense, index) in categoryExpenses">
+          <path :d="generateArc(categoryExpense, index)" :fill="color(categoryExpense.category)" />
+        </template>
+      </g>
+    </svg>
+    <div class="Pie-P" v-for="(categoryExpense, index) in categoryExpenses" :key="index">
+      <div class="color-square" :style="{ backgroundColor: color(categoryExpense.category) }"></div>
+      {{ categoryExpense.category }}: {{ categoryExpense.percentage.toFixed(2) }}%
+    </div>
+  </div>
   `,
   data() {
     return {
