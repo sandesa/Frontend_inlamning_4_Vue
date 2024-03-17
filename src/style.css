@@ -229,11 +229,25 @@ tr:last-child {
     width: auto;
     display: grid;
     grid-template:
-      "a a a"
-      "b b b"
-      "c c c"
-      "d d d"
-      "* e *";
+      "a . b"
+      "c . d"
+      ". e .";
+  }
+
+  form div:nth-child(1) {
+    grid-area: a;
+  }
+  form div:nth-child(2) {
+    grid-area: b;
+  }
+  form div:nth-child(3) {
+    grid-area: c;
+  }
+  form div:nth-child(4) {
+    grid-area: d;
+  }
+  form div:nth-child(5) {
+    grid-area: e;
   }
 
   input,
@@ -243,8 +257,9 @@ tr:last-child {
     margin-bottom: 10px;
   }
 
-  #dateInput {
-    width: 173px;
+  #dateInput,
+  #priceInput {
+    width: 100%;
   }
 
   #add-button-container {
@@ -260,10 +275,6 @@ tr:last-child {
     padding-top: 10px;
   }
 
-  #priceInput {
-    width: auto;
-  }
-
   @media only screen and (max-width: 520px) {
     h1 {
       font-size: 3rem;
@@ -271,6 +282,16 @@ tr:last-child {
 
     form {
       width: auto;
+      grid-template:
+        "a a a"
+        "b b b"
+        "c c c"
+        "d d d"
+        ". e .";
+    }
+
+    form div:nth-child(2) {
+      margin-bottom: 20px;
     }
 
     .filtering div {
