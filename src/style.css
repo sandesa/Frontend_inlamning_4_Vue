@@ -102,6 +102,10 @@ input:focus {
   outline: none;
 }
 
+#priceInput {
+  width: 100px;
+}
+
 #categoryInput,
 #priceInput {
   height: 40px;
@@ -222,8 +226,14 @@ tr:last-child {
   }
 
   form {
-    flex-direction: column;
-    align-items: center;
+    width: auto;
+    display: grid;
+    grid-template:
+      "a a a"
+      "b b b"
+      "c c c"
+      "d d d"
+      "* e *";
   }
 
   input,
@@ -234,7 +244,7 @@ tr:last-child {
   }
 
   #dateInput {
-    width: 100px;
+    width: 173px;
   }
 
   #add-button-container {
@@ -250,9 +260,19 @@ tr:last-child {
     padding-top: 10px;
   }
 
+  #priceInput {
+    width: auto;
+  }
+
+
+
   @media only screen and (max-width: 520px) {
     h1 {
       font-size: 3rem;
+    }
+
+    form {
+      width: auto;
     }
 
     .filtering div {

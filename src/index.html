@@ -21,8 +21,7 @@
         <form @submit.prevent="addExpense">
           <div class="input">
             <label for="priceInput">SEK:</label>
-            <input required type="number" min="0" step="any" id="priceInput" style="width: 100px"
-              v-model.number="newExpense.price" />
+            <input required type="number" min="0" step="any" id="priceInput" v-model.number="newExpense.price" />
           </div>
           <div class="input">
             <label for="dateInput">Datum:</label>
