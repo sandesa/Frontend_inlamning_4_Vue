@@ -24,7 +24,7 @@ let app = Vue.createApp({
   },
   async created() {
     try {
-      const response = await fetch("Frontend_inlamning_4_Vue/data.json");
+      const response = await fetch("data.json");
       this.expenses = await response.json();
     } catch (error) {
       console.error("Ett fel inträffad med inmatning av exempel datan:", error);
