@@ -308,5 +308,8 @@ tr:last-child {
     .filtering {
       flex-direction: column;
     }
+    .filtering div:first-child {
+      padding-right: 10px;
+    }
   }
 }
